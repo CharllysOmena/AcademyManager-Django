@@ -3,8 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.views.decorators.http import require_http_methods
 
-from .forms import AlunoForm
-from .models import Aluno
+from .forms import AlunoForm, TreinoForm
+from .models import Aluno, Treino
+
+#Aluno
 
 @require_http_methods(['GET'])
 @login_required
@@ -51,8 +53,42 @@ def editarAlunos(request, pk):
     else:
         return render(request, "adicionarUsuario.html", context)
 
+@require_http_methods(['GET'])
+@login_required
+def excluirAlunos(request, pk):
+    aluno = get_object_or_404(Aluno, pk=pk)
+    aluno.delete()
+    return redirect('listar_alunos')
+
+#Treino
+
+@require_http_methods(['GET'])
+@login_required
+def listarTreinos(request, pk):
+    aluno = get_object_or_404(Aluno, pk=pk)
+    treino = Treino.objects.filter(aluno_id = aluno)
+    context = {
+        'aluno' : aluno,
+        'treinos' : treino
+    }
+    return render(request, 'listarTreino.html', context)
+
+@require_http_methods(['GET', 'POST'])
+@login_required
+def adicionarTreinos(request, pk):
+    aluno = get_object_or_404(Aluno, pk=pk)
+    treino_aluno = Treino(aluno = aluno)
+    form = TreinoForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('listar_treinos')
+        else:
+            return redirect('adicionar_treinos')
+    else:
+        return render(request, 'adicionarTreino.html', context = {'form':form, 'treino_aluno': treino_aluno})
 
 
-    
+
 
 
