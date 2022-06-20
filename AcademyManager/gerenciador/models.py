@@ -13,3 +13,4 @@ class Treino(models.Model):
     regiao = models.CharField(max_length=50)
 
 
+

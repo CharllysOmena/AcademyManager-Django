@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 
 from .forms import AlunoForm, TreinoForm
@@ -69,7 +70,8 @@ def listarTreinos(request, pk):
     treino = Treino.objects.filter(aluno_id = aluno)
     context = {
         'aluno' : aluno,
-        'treinos' : treino
+        'treinos' : treino,
+        'pk' : pk
     }
     return render(request, 'listarTreino.html', context)
 
@@ -78,16 +80,36 @@ def listarTreinos(request, pk):
 def adicionarTreinos(request, pk):
     aluno = get_object_or_404(Aluno, pk=pk)
     treino_aluno = Treino(aluno = aluno)
-    form = TreinoForm(request.POST or None)
+    form = TreinoForm(request.POST or None, instance=treino_aluno)
     if request.method == 'POST':
         if form.is_valid():
             form.save()
-            return redirect('listar_treinos')
+            return redirect(reverse('listar_treinos', kwargs={'pk' : pk }))
         else:
-            return redirect('adicionar_treinos')
+            return redirect(reverse('adicionar_treinos', kwargs={'pk' : pk }))
     else:
-        return render(request, 'adicionarTreino.html', context = {'form':form, 'treino_aluno': treino_aluno})
+        return render(request, 'adicionarTreino.html', context = {'form':form, 'treino_aluno': treino_aluno, 'aluno' : aluno})
 
+@require_http_methods(['GET', 'POST'])
+@login_required
+def editarTreinos(request, pk):
+    treino = get_object_or_404(Treino, pk=pk)
+    form = TreinoForm(request.POST or None, instance=treino)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('listar_treinos', kwargs={'pk' : treino.aluno.id }))
+        else:
+            return redirect(reverse('editar_treinos', kwargs={'pk' : treino.id }))
+    else:
+        return render(request, 'adicionarTreino.html', context = {'form':form, 'treino': treino})
+
+@require_http_methods(['GET'])
+@login_required
+def excluirTreinos(request, pk):
+    treino = get_object_or_404(Treino, pk=pk)
+    treino.delete()
+    return redirect(reverse('listar_treinos', kwargs={'pk' : treino.aluno.id }))
 
 
 

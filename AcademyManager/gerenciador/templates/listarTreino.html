@@ -61,8 +61,8 @@
                 Mais
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="">Editar</a></li>
-                <li><a class="dropdown-item" href="">Excluir</a></li>
+                <li><a class="dropdown-item" href="{% url 'editar_treinos' treino.id %}">Editar</a></li>
+                <li><a class="dropdown-item" href="{% url 'excluir_treinos' treino.id %}">Excluir</a></li>
                 <li><a class="dropdown-item" href="">Ver exercicios</a></li>
               </ul>
             </div>
@@ -72,7 +72,7 @@
       </tbody>
     </table>
     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-      <a href="{% url 'adicionar_treinos'%}" class="btn btn-success">Novo treino</a>
+      <a href="{% url 'adicionar_treinos' pk %}" class="btn btn-success">Novo treino</a>
     </div>
     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
       <a onclick="history.back()" class="btn btn-danger">Voltar</a>
