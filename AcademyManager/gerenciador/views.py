@@ -111,6 +111,7 @@ def excluirTreinos(request, pk):
     treino.delete()
     return redirect(reverse('listar_treinos', kwargs={'pk' : treino.aluno.id }))
 
+#Exercicio
 
 
 

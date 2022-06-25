@@ -1,5 +1,5 @@
 from django import forms
-from .models import Aluno, Treino
+from .models import Aluno, Exercicio, Treino
 
 class AlunoForm(forms.ModelForm):
     class Meta:
@@ -19,4 +19,14 @@ class TreinoForm(forms.ModelForm):
             'nome' : 'Nome:',
             'tipo' : 'Tipo:',
             'regiao' : 'Região:'
+        }
+
+class ExercicioForm(forms.ModelForm):
+    class Meta:
+        model = Exercicio
+        fields = {'nome', 'series', 'repeticoes' }
+        labels = {
+            'nome' : 'Nome: ',
+            'series' : 'Numéro de series: ',
+            'repeticoes' : 'Numéro de repetições: '
         }
