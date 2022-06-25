@@ -1,11 +1,13 @@
+from multiprocessing import context
+from webbrowser import get
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 
-from .forms import AlunoForm, TreinoForm
-from .models import Aluno, Treino
+from .forms import AlunoForm, ExercicioForm, TreinoForm
+from .models import Aluno, Exercicio, Treino
 
 #Aluno
 
@@ -79,8 +81,8 @@ def listarTreinos(request, pk):
 @login_required
 def adicionarTreinos(request, pk):
     aluno = get_object_or_404(Aluno, pk=pk)
-    treino_aluno = Treino(aluno = aluno)
-    form = TreinoForm(request.POST or None, instance=treino_aluno)
+    treino = Treino(aluno = aluno)
+    form = TreinoForm(request.POST or None, instance=treino)
     if request.method == 'POST':
         if form.is_valid():
             form.save()
@@ -88,7 +90,7 @@ def adicionarTreinos(request, pk):
         else:
             return redirect(reverse('adicionar_treinos', kwargs={'pk' : pk }))
     else:
-        return render(request, 'adicionarTreino.html', context = {'form':form, 'treino_aluno': treino_aluno, 'aluno' : aluno})
+        return render(request, 'adicionarTreino.html', context = {'form':form, 'treino': treino, 'aluno' : aluno})
 
 @require_http_methods(['GET', 'POST'])
 @login_required
@@ -113,5 +115,29 @@ def excluirTreinos(request, pk):
 
 #Exercicio
 
+@require_http_methods(['GET'])
+@login_required
+def listarExercicios(request, pk):
+    treino = get_object_or_404(Treino, pk=pk)
+    exercicio = Exercicio.objects.filter(treino_id = treino)
+    context = {
+        'treinos' : treino,
+        'exercicios' : exercicio,
+        'pk': pk
+    }
+    return render(request, 'listarExercicio.html', context)
 
-
+@require_http_methods(['GET', 'POST'])
+@login_required
+def adicionarExercicios(request, pk):
+    treino = get_object_or_404(Treino, pk=pk)
+    exercicio = Exercicio( treino = treino)
+    form = ExercicioForm(request.POST or None, instance=exercicio)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('listar_exercicios', kwargs={'pk' : pk }))
+        else:
+            return redirect(reverse('adicionar_exercicios', kwargs={'pk' : pk }))
+    else:
+        return render(request, 'adicionarExercicio.html', context = {'treinos': treino, 'form': form, 'exercicios':exercicio})

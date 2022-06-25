@@ -26,7 +26,7 @@ class ExercicioForm(forms.ModelForm):
         model = Exercicio
         fields = {'nome', 'series', 'repeticoes' }
         labels = {
-            'nome' : 'Nome: ',
+            'nome' : 'Nome do exercicio: ',
             'series' : 'Numéro de series: ',
             'repeticoes' : 'Numéro de repetições: '
         }
