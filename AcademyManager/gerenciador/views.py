@@ -141,3 +141,27 @@ def adicionarExercicios(request, pk):
             return redirect(reverse('adicionar_exercicios', kwargs={'pk' : pk }))
     else:
         return render(request, 'adicionarExercicio.html', context = {'treinos': treino, 'form': form, 'exercicios':exercicio})
+
+@require_http_methods(['GET', 'POST'])
+@login_required
+def editarExercicios(request, pk):
+    exercicio = get_object_or_404(Exercicio, pk=pk)
+    form = ExercicioForm(request.POST or None, instance = exercicio)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('listar_exercicios', kwargs={'pk' : exercicio.treino.id}))
+        else:
+            return redirect(reverse('adicionar_exercicios', kwargs={'pk' : exercicio.id}))
+    else:
+        return render(request, 'adicionarExercicio.html', context={'exercicio' : exercicio, 'form': form})
+
+@require_http_methods(['GET'])
+@login_required
+def excluirExercicios(request, pk):
+    exercicio = get_object_or_404(Exercicio, pk=pk)
+    exercicio.delete()
+    return redirect(reverse('listar_exercicios'), kwargs = {'pk' : pk})
+
+# Acesso do aluno
+

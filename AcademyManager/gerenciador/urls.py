@@ -12,4 +12,6 @@ urlpatterns = [
     path('editar_treinos/<int:pk>/', views.editarTreinos, name='editar_treinos'),
     path('listar_exercicios/<int:pk>/', views.listarExercicios, name='listar_exercicios'),
     path('adicionar_exercicios/<int:pk>/', views.adicionarExercicios, name='adicionar_exercicios'),
+    path('editar_exercicios/<int:pk>/', views.editarExercicios, name='editar_exercicios'),
+    path('excluir_exercicios/<int:pk>/', views.excluirExercicios, name='excluir_exercicios'),
 ]

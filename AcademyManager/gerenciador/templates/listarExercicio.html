@@ -61,8 +61,8 @@
                 Mais
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="">Editar</a></li>
-                <li><a class="dropdown-item" href="">Excluir</a></li>
+                <li><a class="dropdown-item" href="{% url 'editar_exercicios' exercicio.id %}">Editar</a></li>
+                <li><a class="dropdown-item" href="{% url 'excluir_exercicios' exercicio.id %}">Excluir</a></li>
               </ul>
             </div>
           </td>
