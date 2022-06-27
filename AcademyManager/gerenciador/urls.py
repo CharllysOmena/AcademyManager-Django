@@ -14,4 +14,6 @@ urlpatterns = [
     path('adicionar_exercicios/<int:pk>/', views.adicionarExercicios, name='adicionar_exercicios'),
     path('editar_exercicios/<int:pk>/', views.editarExercicios, name='editar_exercicios'),
     path('excluir_exercicios/<int:pk>/', views.excluirExercicios, name='excluir_exercicios'),
+    path('area_do_aluno', views.areaDoAluno, name='area_do_aluno'),
+    path('buscar_alunos', views.buscarAlunos, name='buscar_alunos')
 ]

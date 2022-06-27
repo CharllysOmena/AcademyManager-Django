@@ -1,5 +1,3 @@
-from multiprocessing import context
-from webbrowser import get
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -8,6 +6,7 @@ from django.views.decorators.http import require_http_methods
 
 from .forms import AlunoForm, ExercicioForm, TreinoForm
 from .models import Aluno, Exercicio, Treino
+from core import utils
 
 #Aluno
 
@@ -164,4 +163,21 @@ def excluirExercicios(request, pk):
     return redirect(reverse('listar_exercicios'), kwargs = {'pk' : pk})
 
 # Acesso do aluno
+
+@require_http_methods(['GET'])
+def areaDoAluno(request):
+    return render(request, 'areadoaluno.html')
+
+@require_http_methods(["GET"])
+def buscarAlunos(request):
+    form = AlunoForm(request.POST or None)
+    pesquisa = request.GET['pesquisa']
+    filtro = utils.montador_de_filtro(Aluno, ['nome', 'matricula', 'cpf'], pesquisa)
+    aluno = Aluno.objects.filter(filtro)
+    context = {
+        'pesquisa' : pesquisa,
+        'alunos' : aluno,
+        'form' : form
+    }
+    return render(request, 'aluno.html', context)
 
