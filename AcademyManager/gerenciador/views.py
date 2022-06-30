@@ -181,3 +181,24 @@ def buscarAlunos(request):
     }
     return render(request, 'aluno.html', context)
 
+@require_http_methods(['GET'])
+def treinos(request, pk):
+    aluno = get_object_or_404(Aluno, pk=pk)
+    treino = Treino.objects.filter(aluno_id = aluno)
+    context = {
+        'aluno' : aluno,
+        'treinos' : treino,
+        'pk' : pk
+    }
+    return render(request, 'treino.html', context)
+
+@require_http_methods(['GET'])
+def exercicios(request, pk):
+    treino = get_object_or_404(Treino, pk=pk)
+    exercicio = Exercicio.objects.filter(treino_id = treino)
+    context = {
+        'treinos' : treino,
+        'exercicios' : exercicio,
+        'pk': pk
+    }
+    return render(request, 'exercicio.html', context)

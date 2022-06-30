@@ -15,5 +15,7 @@ urlpatterns = [
     path('editar_exercicios/<int:pk>/', views.editarExercicios, name='editar_exercicios'),
     path('excluir_exercicios/<int:pk>/', views.excluirExercicios, name='excluir_exercicios'),
     path('area_do_aluno', views.areaDoAluno, name='area_do_aluno'),
-    path('buscar_alunos', views.buscarAlunos, name='buscar_alunos')
+    path('buscar_alunos', views.buscarAlunos, name='buscar_alunos'),
+    path('treinos/<int:pk>/', views.treinos, name='treinos'),
+    path('exercicios/<int:pk>/', views.exercicios, name='exercicios')
 ]
