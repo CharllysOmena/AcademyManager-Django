@@ -5,16 +5,22 @@ Esse projeto foi desenvolvido utilizando django com o intuito de demonstrar a ut
 
 <p>
   <img width="600" src="AcademyManager\imagens\tela inicial.png">
+  
   * Tela inicial
   <img width="600" src="AcademyManager\imagens\tela login.png">
+  
   * Tela de login
   <img width="600" src="AcademyManager\imagens\tela adm.png">
+  
   * Tela de administrador
   <img width="600" src="AcademyManager\imagens\tela adm2.png">
+  
   * Tela para adicionar (em cada sessão existe uma tela especifica pra adicionar cada entidade)
   <img width="600" src="AcademyManager\imagens\tela usuario.png">
+  
   * Tela de pesquisa do usuário
   <img width="600" src="AcademyManager\imagens\tela usuario2.png">
+  
   * Tela de listagem do usuário
 </p>
 
