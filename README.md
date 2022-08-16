@@ -4,6 +4,7 @@ Esse projeto foi desenvolvido utilizando django com o intuito de demonstrar a ut
 ## Telas do projeto
 
 <p>
+ 
   * Tela inicial
   <img width="600" src="AcademyManager\imagens\tela inicial.png">
   
