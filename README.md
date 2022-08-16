@@ -4,17 +4,17 @@ Esse projeto foi desenvolvido utilizando django com o intuito de demonstrar a ut
 ## Telas do projeto
 
 <p>
-  <img width="300" src="AcademyManager\imagens\tela inicial.png">
+  <img width="600" src="AcademyManager\imagens\tela inicial.png">
   
-  <img width="300" src="AcademyManager\imagens\tela login.png">
+  <img width="600" src="AcademyManager\imagens\tela login.png">
   
-  <img width="300" src="AcademyManager\imagens\tela adm.png">
+  <img width="600" src="AcademyManager\imagens\tela adm.png">
   
-  <img width="300" src="AcademyManager\imagens\tela adm2.png">
+  <img width="600" src="AcademyManager\imagens\tela adm2.png">
   
-  <img width="300" src="AcademyManager\imagens\tela usuario.png">
+  <img width="600" src="AcademyManager\imagens\tela usuario.png">
   
-  <img width="300" src="AcademyManager\imagens\tela usuario2.png">
+  <img width="600" src="AcademyManager\imagens\tela usuario2.png">
 </p>
 
 ## Principais tecnologias usadas
